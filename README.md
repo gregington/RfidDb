@@ -75,6 +75,7 @@ if (db.get(4, id)) {
 } else {
   Serial.println("Get unsuccessful");
 }
+```
 
 ### contains
 Returns true if the database contains the given identifier, false otherwise.
