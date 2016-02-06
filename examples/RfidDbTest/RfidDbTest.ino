@@ -1,7 +1,7 @@
 #include "EEPROM.h"
 #include "RfidDb.h"
 
-RfidDb db = RfidDb(4, 0);
+RfidDb db = RfidDb(4, 0, 4);
 
 uint32_t id1 = 1000000001;
 uint32_t id2 = 1000000002;
@@ -21,52 +21,52 @@ void setup() {
   Serial.println("Empty database");
   dumpState();
 
-  Serial.print("Inserting id 1 = ");
-  Serial.println(db.insert(id1));
+  Serial.print("Inserting id1 = ");
+  Serial.println(db.insert(id1, "AAA"));
   dumpState();
   dumpContains();
   
-  Serial.print("Inserting id 2 = ");
-  Serial.println(db.insert(id2));
+  Serial.print("Inserting id2 = ");
+  Serial.println(db.insert(id2, "BBB"));
   dumpState();
   dumpContains();
 
-  Serial.print("Inserting id 3 = ");
-  Serial.println(db.insert(id3));
+  Serial.print("Inserting id3 = ");
+  Serial.println(db.insert(id3, "CCC"));
   dumpState();
   dumpContains();
 
-  Serial.print("Inserting id 4 = ");
-  Serial.println(db.insert(id4));
+  Serial.print("Inserting id4 = ");
+  Serial.println(db.insert(id4, "DDD"));
   dumpState();
   dumpContains();
 
-  Serial.print("Inserting id 5 = ");
-  Serial.println(db.insert(id5));
+  Serial.print("Inserting id5 = ");
+  Serial.println(db.insert(id5, "EEE"));
   dumpState();
   dumpContains();
 
-  Serial.println("Removing id 5");
+  Serial.println("Removing id5");
   db.remove(id5);
   dumpState();
   dumpContains();
 
-  Serial.println("Removing id 1");
+  Serial.println("Removing id1");
   db.remove(id1);
   dumpState();
   dumpContains();
 
-  Serial.println("Removing id 3");
+  Serial.println("Removing id3");
   db.remove(id3);
   dumpState();
   dumpContains();
 
-  Serial.println("Removing id 2");
+  Serial.println("Removing id2");
   db.remove(id2);
   dumpState();
   dumpContains();
 
-  Serial.println("Removing id 4");
+  Serial.println("Removing id4");
   db.remove(id4);
   dumpState();
   dumpContains();
@@ -83,9 +83,14 @@ void dumpState() {
   Serial.print(count);
   Serial.print(" [");
   uint32_t id;
+  char name[db.maxNameLength()];
   for (int i = 0; i < count; i++) {
-    if (db.get(i, id)) {
+    if (db.getId(i, id)) {
       Serial.print(id);
+      if (db.getName(i, name)) {
+        Serial.print(":");        
+        Serial.print(name);
+      }
       if (i < count - 1) {
         Serial.print(", ");
       }
@@ -106,4 +111,3 @@ void dumpContains() {
   Serial.print("Contains id5 = ");
   Serial.println(db.contains(id5));  
 }
-
