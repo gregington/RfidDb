@@ -56,7 +56,7 @@ class RfidDb {
     // given name is longer than the specified maximum name length then
     // the name is truncated to fit. If the identifier already exists then
     // the name is updated to the given name.
-    bool insert(uint32_t id, char* name);
+    bool insert(uint32_t id, const char* name);
 
     // Removes the entry with the given identifier from the database, if it
     // exists. 
@@ -88,7 +88,7 @@ class RfidDb {
     int16_t posOf(uint32_t id);
     uint32_t getId(uint8_t pos);
     void writeId(uint8_t pos, uint32_t id);
-    void writeName(uint8_t pos, char* name);
+    void writeName(uint8_t pos, const char* name);
     void copyName(uint8_t srcPos, uint8_t destPos);
     bool hasMagic();
     void initDb();

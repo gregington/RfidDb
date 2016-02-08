@@ -49,7 +49,7 @@ bool RfidDb::insert(uint32_t id) {
   return insert(id, "");
 }
 
-bool RfidDb::insert(uint32_t id, char* name) {
+bool RfidDb::insert(uint32_t id, const char* name) {
   // if already exists in the database, we update the name
   int16_t pos = posOf(id);
   if (pos != -1) {
@@ -136,7 +136,7 @@ inline void RfidDb::writeId(uint8_t pos, uint32_t id) {
 }
 
 // Writes a name to the database at a given position
-void RfidDb::writeName(uint8_t pos, char* name) {
+void RfidDb::writeName(uint8_t pos, const char* name) {
   if (_maxNameLength > 0) {
     uint8_t base = nameOffset(pos);
     for (int i = 0; i < _maxNameLength - 1; i++) {
