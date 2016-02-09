@@ -112,11 +112,29 @@ bool RfidDb::contains(uint32_t id) {
   return posOf(id) != -1;
 }
 
-// Returns the position of given id in the database or -1
-// if the id is not in the database
+bool RfidDb::contains24(uint32_t id) {
+  return posOf24(id) != -1;
+}
+
+// Returns the position of the given id in the database or -1 if the id is 
+// not in the database
 int16_t RfidDb::posOf(uint32_t id) {
+  return posOf(id, 0xFFFFFFFF);
+}
+
+// Returns the position of the given id in the database when compared on the
+// low 24 bits of the id.
+int16_t RfidDb::posOf24(uint32_t id) {
+  return posOf(id, 0x00FFFFFF);
+}
+
+// Returns the position of the given id when compared with ids in the datbase
+// after both the database id and the given id are bit masked with the given
+// mask
+int16_t RfidDb::posOf(uint32_t id, uint32_t mask) {
+  uint32_t maskedId = id & mask;
   for (uint8_t i = 0, n = count(); i < n; i++) {
-    if (id == getId(i)) {
+    if (maskedId == (getId(i) & mask)) {
       return i;
     }
   }

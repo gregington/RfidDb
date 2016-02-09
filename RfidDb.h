@@ -80,12 +80,20 @@ class RfidDb {
     // Returns whether the database contains the given identifier.
     bool contains(uint32_t id);
 
+    // Returns whether the database contains an indentifier where the low 24
+    // bits matches the low 24 bits of the given identifier. This is useful
+    // when reading from a Wiegand 26 device (that returns a 24 bit id) with
+    // identifers stored as 32 vit ids.
+    bool contains24(uint32_t id);
+
   private:
     uint16_t _eepromOffset;
     uint8_t _maxSize;
     uint8_t _maxNameLength;
 
     int16_t posOf(uint32_t id);
+    int16_t posOf24(uint32_t id);
+    int16_t posOf(uint32_t id, uint32_t mask);
     uint32_t getId(uint8_t pos);
     void writeId(uint8_t pos, uint32_t id);
     void writeName(uint8_t pos, const char* name);

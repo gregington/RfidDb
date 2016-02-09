@@ -145,3 +145,17 @@ if (db.contains(10042)) {
   Serial.println("Not in database");
 }
 ```
+
+## contains24
+Returns 2 if the low order 24-bits of the specified id match the low order
+24 bits of any id in the databse. This us useful if 32 bit ids are stored in
+the database and the ids are read using a Wiegand26 reader which returns
+24 bits.
+
+```c++
+if (db.contains24(10042)) {
+  Serial.println("In database");
+} else {
+  Serial.println("Not in database");
+}
+```

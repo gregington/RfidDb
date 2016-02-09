@@ -3,11 +3,11 @@
 
 RfidDb db = RfidDb(4, 0, 4);
 
-uint32_t id1 = 1000000001;
-uint32_t id2 = 1000000002;
-uint32_t id3 = 1000000003;
-uint32_t id4 = 1000000004;
-uint32_t id5 = 1000000005;
+uint32_t id1 = 0xFFFFFF01;
+uint32_t id2 = 0xFFFFFF02;
+uint32_t id3 = 0xFFFFFF03;
+uint32_t id4 = 0xFFFFFF04;
+uint32_t id5 = 0xFFFFFF05;
 
 void setup() {
   Serial.begin(9600);
@@ -25,51 +25,61 @@ void setup() {
   Serial.println(db.insert(id1, "AAA"));
   dumpState();
   dumpContains();
+  dumpContains24();
   
   Serial.print("Inserting id2 = ");
   Serial.println(db.insert(id2, "BBB"));
   dumpState();
   dumpContains();
+  dumpContains24();
 
   Serial.print("Inserting id3 = ");
   Serial.println(db.insert(id3, "CCC"));
   dumpState();
   dumpContains();
+  dumpContains24();
 
   Serial.print("Inserting id4 = ");
   Serial.println(db.insert(id4, "DDD"));
   dumpState();
   dumpContains();
+  dumpContains24();
 
   Serial.print("Inserting id5 = ");
   Serial.println(db.insert(id5, "EEE"));
   dumpState();
   dumpContains();
+  dumpContains24();
 
   Serial.println("Removing id5");
   db.remove(id5);
   dumpState();
   dumpContains();
+  dumpContains24();
 
   Serial.println("Removing id1");
   db.remove(id1);
   dumpState();
   dumpContains();
+  dumpContains24();
 
   Serial.println("Removing id3");
   db.remove(id3);
   dumpState();
   dumpContains();
+  dumpContains24();
 
   Serial.println("Removing id2");
   db.remove(id2);
   dumpState();
   dumpContains();
+  dumpContains24();
 
   Serial.println("Removing id4");
   db.remove(id4);
   dumpState();
   dumpContains();
+  dumpContains24();
 }
 
 void loop() {
@@ -109,5 +119,18 @@ void dumpContains() {
   Serial.print("Contains id4 = ");
   Serial.println(db.contains(id4));
   Serial.print("Contains id5 = ");
+  Serial.println(db.contains(id5));  
+}
+
+void dumpContains24() {
+  Serial.print("Contains (24 bit) id1 = ");
+  Serial.println(db.contains(id1));
+  Serial.print("Contains (24 bit) id2 = ");
+  Serial.println(db.contains(id2));
+  Serial.print("Contains (24 bit) id3 = ");
+  Serial.println(db.contains(id3));
+  Serial.print("Contains (24 bit) id4 = ");
+  Serial.println(db.contains(id4));
+  Serial.print("Contains (24 bit) id5 = ");
   Serial.println(db.contains(id5));  
 }
