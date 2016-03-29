@@ -147,7 +147,7 @@ if (db.contains(10042)) {
 ```
 
 ## contains24
-Returns 2 if the low order 24-bits of the specified id match the low order
+Returns true if the low order 24-bits of the specified id match the low order
 24 bits of any id in the databse. This us useful if 32 bit ids are stored in
 the database and the ids are read using a Wiegand26 reader which returns
 24 bits.
