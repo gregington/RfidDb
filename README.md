@@ -40,6 +40,18 @@ void setup() {
 }
 ```
 
+## ESP8266/ESP32
+If using the library with ESP8266 or ESP32 platforms, you must call EEPROM.begin() before RfidDb.begin(). The method RfidDb.dbSize() is useful to determine the maximum size of the RFID database. For example:
+
+```c++
+RfidDb db = Rfid(8, 0, 24);
+
+void setup() {
+	EEPROM.begin(db.dbSize());
+	db.begin();
+}
+```
+
 ## Database Methods
 The public methods available on the RfidDb are described below.
 
@@ -48,6 +60,13 @@ Returns the maximum number of identifiers that can be held in the database.
 
 ```c++
 db.maxSize();
+```
+
+### dbSize
+Returns the total size of the database in bytes.
+
+```c++
+db.dbSize();
 ```
 
 ### maxNameLength
